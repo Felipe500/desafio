@@ -9,6 +9,9 @@ class ServidorVirtual(object):
         with open("input.txt",'r') as entrada:
             self.tick_por_tarefa = (entrada.readline(2).rstrip("\n"))
             self.max_users_servidor = (entrada.readline(1).rstrip("\n"))
-        print("config: ", x ,"  -- " ,y)
+        print("configuração do Balanceamento de carga:")
+        print("Número máximo de ticks por tarefa: ", self.tick_por_tarefa)
+        print("Número máximo de usuários por servidores virtuais: ", self.max_users_servidor)
+
 
 ServidorVirtual()
