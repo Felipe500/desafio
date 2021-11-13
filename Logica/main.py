@@ -87,15 +87,16 @@ class Balanceamento_Carga(object):
 
             self.servidores = lista.count(2) + lista.count(1)
             #print("lista----",lista)
-            tarefas += 1
-            print("contador de ticks: ", tarefas)
+            if tarefas < 5:
+                tarefas += 1
+                print("contador de ticks: ", tarefas)
 
-            if tarefas == 4:
+            if tarefas > 4:
                 #print("removido servidor...")
-                tarefas = 0
+                tarefas = 4
 
                 users_remover = user_remover_list[0]
-                print("users a serem removidos: ",self.input_usuarios[0])
+                print("users a serem removidos: ",user_remover_list[0])
                 while users_remover > 0:
                     print("removido")
                     users_remover = users_remover - 1

@@ -1,10 +1,10 @@
 # SOBRE O PROJETO
-
+12/11/21 7:31: <br>
 Decide utilizar a estrutura de programação orientada a objetos,
 por ser mais facil de manipudar variaveis e criar objetos para interagir com eles.
 
-12/11/21 7:31: <br>
-Elaborando estrutura do projeto
+
+Elaborando estrutura do projeto:
 
 Estrutura:
 --> Classe: Balanceamento_Carga
@@ -27,3 +27,5 @@ Balancear_Carga e Balancear_Carga1
 Criando as primeiras otimizações:
  - Verficando código repetido.  
  - Primeiros testes em massa pelo arquivos input.txt
+
+ - Criando mecanismo de remoção de usuários quando os mesmo atingem o limite de tarefas ou ttask permitida.
