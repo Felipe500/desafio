@@ -43,13 +43,13 @@ class Balanceamento_Carga(object):
         tarefas = 0
         lista = [0]
         #print(self.input_usuarios)
-        for x in range(10):
+        for x in range(len(self.input_usuarios)+4):
             linha +=1
             cont = 0
             if x<len(self.input_usuarios):
-                print('|', x + 1, "    | ", self.input_usuarios[x], "              | ", self.servidores)
 
-                print(self.input_usuarios[x])
+
+                print('Entrou: ',self.input_usuarios[x])
                 entrada_users = self.input_usuarios[x]
                 while entrada_users > 0:
                     #print(self.input_usuarios)
