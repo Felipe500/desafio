@@ -42,9 +42,9 @@ class Balanceamento_Carga(object):
         linha = 0
         tarefas = 0
         lista = [0]
-        user_remover_list = self.input_usuarios
+        user_remover_list = self.input_usuarios.copy()
         #print(self.input_usuarios)
-        for x in range(len(self.input_usuarios)+4):
+        for x in range(len(self.input_usuarios)+7):
             linha +=1
             cont = 0
             if x<len(self.input_usuarios):
@@ -87,20 +87,23 @@ class Balanceamento_Carga(object):
 
             self.servidores = lista.count(2) + lista.count(1)
             #print("lista----",lista)
-            if tarefas < 5:
-                tarefas += 1
-                print("contador de ticks: ", tarefas)
 
-            if tarefas > 4:
+            tarefas += 1
+            print("contador de ticks: ", tarefas)
+
+            if tarefas > 3:
                 #print("removido servidor...")
                 tarefas = 4
 
-                users_remover = user_remover_list[0]
-                print("users a serem removidos: ",user_remover_list[0])
-                while users_remover > 0:
-                    print("removido")
-                    users_remover = users_remover - 1
-                print(user_remover_list.pop(0))
+                if not len(user_remover_list) == 0:
+
+                    users_remover = user_remover_list[0]
+                    print("users a serem removidos: ",user_remover_list[0])
+                    while users_remover > 0:
+                        users_remover = users_remover - 1
+                    print(user_remover_list.pop(0))
+                else:
+                    print("Esperando entrada de usuários: ")
 
 
             #print(self.server_lis)
