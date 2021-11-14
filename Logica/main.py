@@ -16,19 +16,19 @@ class Balanceamento_Carga(object):
 
 
     def Config_Servidor(self):
-        with open("input.txt",'r') as entrada:
-            self.tick_por_tarefa = (entrada.readline(2).rstrip("\n"))
-            self.max_users_servidor = (entrada.readline(1).rstrip("\n"))
-        print("configuração do Balanceamento de carga:")
-        print("Número máximo de ticks por tarefa: ", self.tick_por_tarefa)
-        print("Número máximo de usuários por servidores virtuais: ", self.max_users_servidor)
+        pass
+
 
     def Entrada_De_Usuarios(self):
-        with open("input.txt",'r') as arquivo:
-            self.tick_por_tarefa = (arquivo.readline(2).rstrip("\n"))
-            self.max_users_servidor = (arquivo.readline(1).rstrip("\n"))
+        with open("input.txt",'r') as entrada:
+            self.tick_por_tarefa = int(entrada.readline(2).rstrip("\n"))
+            self.max_users_servidor = int(entrada.readline(1).rstrip("\n"))
+            print("configuração do Balanceamento de carga:")
+            print("Número máximo de ticks por tarefa: ", self.tick_por_tarefa)
+            print("Número máximo de usuários por servidores virtuais: ", self.max_users_servidor)
+
             linha = 0
-            for usuarios in arquivo.readlines():
+            for usuarios in entrada.readlines():
                 linha += 1
                 if linha > 1:
                     self.input_usuarios.append( int(usuarios.rstrip("\n")))
@@ -44,46 +44,11 @@ class Balanceamento_Carga(object):
         lista = [0]
         user_remover_list = self.input_usuarios.copy()
         #print(self.input_usuarios)
-        for x in range(len(self.input_usuarios)+8):
+        total_ticks = int(len(self.input_usuarios))+ (self.tick_por_tarefa)+4
+        for x in range(total_ticks):
             linha +=1
             cont = 0
-            if x<len(self.input_usuarios):
 
-                print('Entrou ',self.input_usuarios[x], ' usuarios')
-                entrada_users = self.input_usuarios[x]
-                while entrada_users > 0:
-                    #print(self.input_usuarios)
-                    if entrada_users == 1:
-
-                        if (lista[-1] == 1) or (lista[-1] == 0):
-                            lista[-1] = lista[-1] + 1
-                            # print(" valor add ", lista)
-                            entrada_users = entrada_users - 1
-                            # print("lista[-1] ", lista)
-                            #print("lista----", lista)
-                        else:
-                            lista.append(1)
-                            # print("lista[-1] ", lista)
-                            #print(" 1 user atuais tt", entrada_users)
-                            entrada_users = entrada_users - 1
-                            #print("lista----", lista)
-
-                    elif entrada_users >= 2:
-                        if (lista[-1] == 1):
-                            lista[-1] = lista[-1] + 1
-                            #print(" valor add ", lista)
-                            entrada_users = entrada_users - 1
-                            # print("lista[-1] ", lista)
-                            #print("lista----", lista)
-                        elif lista[-1] == 2:
-                            lista.append(2)
-                            # print("lista[-1] ", lista)
-                            #print(" 1 user atuais tt", entrada_users)
-                            entrada_users = entrada_users - 2
-                            #print("lista----", lista)
-
-            else:
-                print('Entrou 0 usuarios...')
 
             self.servidores = lista.count(2) + lista.count(1)
             #print("lista----",lista)
@@ -91,24 +56,69 @@ class Balanceamento_Carga(object):
             tarefas += 1
             print("contador de ticks: ", tarefas)
 
-            if tarefas > 3:
+            if tarefas > 4:
                 #print("removido servidor...")
                 tarefas = 4
 
                 if not len(user_remover_list) == 0:
 
-                    users_remover = user_remover_list[0]
-                    print("users a serem removidos: ",user_remover_list[0])
+                    users_remover = user_remover_list.pop(0)
+                    print("users a serem removidos: ",users_remover)
                     while users_remover > 0:
+                        if users_remover == 1:
 
-                        users_remover = users_remover - 1
-                        
+                            if lista[0] == 1:
+                                lista.pop(0)
+                                users_remover = users_remover - 1
 
-                    print(user_remover_list.pop(0))
+                            elif lista[0] == 2:
+                                lista[0] = lista[0] - 1
+                                users_remover = users_remover - 1
+
+                        elif users_remover >= 2:
+
+                            if (lista[0] == 1):
+                                lista.pop(0)
+                                users_remover = users_remover - 1
+
+                            elif lista[0] == 2:
+                                lista[0] = lista[0] - 1
+                                users_remover = users_remover - 1
+
+                        #print("lista-remover---",user_remover_list)
+
+                    #print(user_remover_list.pop(0))
                 else:
                     print("Esperando entrada de usuários: ")
 
+            if x<len(self.input_usuarios):
 
+                print('Entrou ',self.input_usuarios[x], ' usuarios')
+                entrada_users = self.input_usuarios[x]
+                while entrada_users > 0:
+
+                    if entrada_users == 1:
+
+                        if (lista[-1] == 1) or (lista[-1] == 0):
+                            lista[-1] = lista[-1] + 1
+                            entrada_users = entrada_users - 1
+
+                        else:
+                            lista.append(1)
+                            entrada_users = entrada_users - 1
+
+                    elif entrada_users >= self.max_users_servidor:
+                        if (lista[-1] == 1):
+                            lista[-1] = lista[-1] + 1
+                            entrada_users = entrada_users - 1
+
+                        elif lista[-1] == 2:
+                            lista.append(2)
+                            entrada_users = entrada_users - 2
+
+
+            else:
+                print('Entrou 0 usuarios...')
             #print(self.server_lis)
             #print(self.server)
             print("---------------------------------------------------------")
