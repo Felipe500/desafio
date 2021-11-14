@@ -121,12 +121,13 @@ class Balanceamento_Carga(object):
                 print('Entrou 0 usuarios...')
             #print(self.server_lis)
             #print(self.server)
+            numero_servidores = lista.count(2) + lista.count(1)
             print("---------------------------------------------------------")
             print("| Tick  | usuários logados | Servidores")
             if x<len(self.input_usuarios):
-                print('|', x + 1, "    | ", self.input_usuarios[x], "              | ", self.servidores)
+                print('|', x + 1, "    | ", self.input_usuarios[x], "              | ", numero_servidores)
             else:
-                print('|', x+1, "   | ",'---', "            | ", self.servidores)
+                print('|', x+1, "   | ",'---', "            | ", numero_servidores)
             print("---------------------------------------------------------")
             print("lista ", lista)
             print("--------------------------------------------------------")
