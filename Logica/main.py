@@ -18,6 +18,11 @@ class Balanceamento_Carga(object):
     def Config_Servidor(self):
         pass
 
+    def Saida_De_Usuarios(self, *lista):
+        with open("output.txt", 'w') as saida:
+            for valor in lista:
+                saida.write(str(valor) + '\n')
+
 
     def Entrada_De_Usuarios(self):
         with open("input.txt",'r') as entrada:
@@ -53,13 +58,14 @@ class Balanceamento_Carga(object):
             self.servidores = lista.count(2) + lista.count(1)
             #print("lista----",lista)
 
+
             tarefas += 1
-            print("contador de ticks: ", tarefas)
+
 
             if tarefas > 4:
                 #print("removido servidor...")
                 tarefas = 4
-
+                print("contador de ticks atingiu: ", tarefas)
                 if not len(user_remover_list) == 0:
 
                     users_remover = user_remover_list.pop(0)
@@ -121,16 +127,20 @@ class Balanceamento_Carga(object):
                 print('Entrou 0 usuarios...')
             #print(self.server_lis)
             #print(self.server)
+
             numero_servidores = lista.count(2) + lista.count(1)
             print("---------------------------------------------------------")
             print("| Tick  | usuários logados | Servidores")
             if x<len(self.input_usuarios):
+                self.Saida_De_Usuarios(lista)
+
                 print('|', x + 1, "    | ", self.input_usuarios[x], "              | ", numero_servidores)
             else:
                 print('|', x+1, "   | ",'---', "            | ", numero_servidores)
             print("---------------------------------------------------------")
             print("lista ", lista)
             print("--------------------------------------------------------")
+        self.Saida_De_Usuarios(lista)
 
 
 
