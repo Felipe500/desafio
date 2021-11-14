@@ -44,7 +44,7 @@ class Balanceamento_Carga(object):
         lista = [0]
         user_remover_list = self.input_usuarios.copy()
         #print(self.input_usuarios)
-        total_ticks = int(len(self.input_usuarios))+ (self.tick_por_tarefa)+4
+        total_ticks = int(len(self.input_usuarios))+ (self.tick_por_tarefa)
         for x in range(total_ticks):
             linha +=1
             cont = 0
