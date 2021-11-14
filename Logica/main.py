@@ -44,7 +44,7 @@ class Balanceamento_Carga(object):
         lista = [0]
         user_remover_list = self.input_usuarios.copy()
         #print(self.input_usuarios)
-        for x in range(len(self.input_usuarios)+7):
+        for x in range(len(self.input_usuarios)+8):
             linha +=1
             cont = 0
             if x<len(self.input_usuarios):
@@ -100,7 +100,10 @@ class Balanceamento_Carga(object):
                     users_remover = user_remover_list[0]
                     print("users a serem removidos: ",user_remover_list[0])
                     while users_remover > 0:
+
                         users_remover = users_remover - 1
+                        
+
                     print(user_remover_list.pop(0))
                 else:
                     print("Esperando entrada de usuários: ")
