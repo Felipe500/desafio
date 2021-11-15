@@ -4,8 +4,8 @@ class Balanceamento_Carga(object):
         self.tick_por_tarefa = 0
         self.max_users_servidor = 0
         self.servidores = 0
-        self.server = {}
-        self.server_lis = []
+        self.saida_lista = []
+        self.entrada_lista = []
         self.input_usuarios = []
 
         self.total_users = 0
@@ -43,29 +43,24 @@ class Balanceamento_Carga(object):
 
     def Balancear_Carga(self):
         self.Entrada_De_Usuarios()
-        entrada_users = 0
-        linha = 0
-        tarefas = 0
+        contador_tick = 0
+        limite_max_ticks = 0
         lista = [0]
         user_remover_list = self.input_usuarios.copy()
         #print(self.input_usuarios)
         total_ticks = int(len(self.input_usuarios))+ (self.tick_por_tarefa)
-        for x in range(total_ticks):
-            linha +=1
-            cont = 0
+        for tick in range(total_ticks):
+            contador_tick +=1
 
 
-            self.servidores = lista.count(2) + lista.count(1)
-            #print("lista----",lista)
+
+            limite_max_ticks += 1
 
 
-            tarefas += 1
-
-
-            if tarefas > 4:
+            if limite_max_ticks > 4:
                 #print("removido servidor...")
-                tarefas = 4
-                print("contador de ticks atingiu: ", tarefas)
+                limite_max_ticks = 4
+                print("contador de ticks atingiu: ", limite_max_ticks)
                 if not len(user_remover_list) == 0:
 
                     users_remover = user_remover_list.pop(0)
@@ -77,7 +72,7 @@ class Balanceamento_Carga(object):
                                 lista.pop(0)
                                 users_remover = users_remover - 1
 
-                            elif lista[0] == 2:
+                            elif lista[0] >= self.max_users_servidor:
                                 lista[0] = lista[0] - 1
                                 users_remover = users_remover - 1
 
@@ -87,21 +82,20 @@ class Balanceamento_Carga(object):
                                 lista.pop(0)
                                 users_remover = users_remover - 1
 
-                            elif lista[0] == 2:
+                            elif lista[0] > 1:
                                 lista[0] = lista[0] - 1
                                 users_remover = users_remover - 1
 
-                        #print("lista-remover---",user_remover_list)
 
-                    #print(user_remover_list.pop(0))
                 else:
                     print("Esperando entrada de usuários: ")
 
-            if x<len(self.input_usuarios):
+            if tick<len(self.input_usuarios):
 
-                print('Entrou ',self.input_usuarios[x], ' usuarios')
-                entrada_users = self.input_usuarios[x]
+                print('Entrou ',self.input_usuarios[tick], ' usuarios')
+                entrada_users = self.input_usuarios[tick]
                 while entrada_users > 0:
+                    print("r")
 
                     if entrada_users == 1:
 
@@ -109,18 +103,18 @@ class Balanceamento_Carga(object):
                             lista[-1] = lista[-1] + 1
                             entrada_users = entrada_users - 1
 
-                        else:
+                        elif lista[-1] >= self.max_users_servidor:
                             lista.append(1)
                             entrada_users = entrada_users - 1
 
-                    elif entrada_users >= self.max_users_servidor:
-                        if (lista[-1] == 1):
+                    elif entrada_users >= 2:
+                        if (lista[-1] < self.max_users_servidor):
                             lista[-1] = lista[-1] + 1
                             entrada_users = entrada_users - 1
 
-                        elif lista[-1] == 2:
-                            lista.append(2)
-                            entrada_users = entrada_users - 2
+                        elif lista[-1] == self.max_users_servidor:
+                            lista.append(self.max_users_servidor)
+                            entrada_users = entrada_users - self.max_users_servidor
 
 
             else:
@@ -131,12 +125,12 @@ class Balanceamento_Carga(object):
             numero_servidores = lista.count(2) + lista.count(1)
             print("---------------------------------------------------------")
             print("| Tick  | usuários logados | Servidores")
-            if x<len(self.input_usuarios):
+            if tick<len(self.input_usuarios):
                 self.Saida_De_Usuarios(lista)
 
-                print('|', x + 1, "    | ", self.input_usuarios[x], "              | ", numero_servidores)
+                print('|', tick + 1, "    | ", self.input_usuarios[tick], "              | ", numero_servidores)
             else:
-                print('|', x+1, "   | ",'---', "            | ", numero_servidores)
+                print('|', tick+1, "   | ",'---', "            | ", numero_servidores)
             print("---------------------------------------------------------")
             print("lista ", lista)
             print("--------------------------------------------------------")
