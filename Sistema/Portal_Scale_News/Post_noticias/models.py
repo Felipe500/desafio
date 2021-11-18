@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCountMixin, HitCount
 from ckeditor.fields import RichTextField
-
-
 from user_perfil.models import Perfil_Usuario
 
 

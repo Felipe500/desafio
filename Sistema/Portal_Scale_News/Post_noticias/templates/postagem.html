@@ -8,9 +8,10 @@
           <h6 class="card-subtitle">{{ Pos.subtitulo }}</h6>
         <p class="card-text">{{Pos.content|safe }}</p>
 
-
+            <img  class="card-img-bottom" src="{{ Pos.image_file.url }}" id="img" alt="Card image cap">
       </div>
-    <img class="img-fluid" src="{{ Pos.image_file.url }}" alt="Card image cap">
+</div>
+
 
           <HR>
          <a href="#" class="btn btn-primary">Ver na fonte original</a>
@@ -102,5 +103,5 @@
                 </div>
             </div>
         </div>
-          </div>
+
 {% endblock %}
