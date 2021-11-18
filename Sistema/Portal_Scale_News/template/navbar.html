@@ -39,17 +39,7 @@
 
     </div>
   </div>
-            <div class="container">
-            {% if request.user.is_staff %}
-           <span class="hello-msg">Olá,&nbsp; {{request.user.perfil_usuario}}</span>
-           {% else %}
-            <span class="hello-msg">Olá,&nbsp; {{request.user}}
 
-            </span>
-            <span><a class="hello-msg" href="">Configurar perfil</a></span>
-           {% endif %}
-              <span ><a  class="hello-msg" href="">&nbsp;Sair da conta</a></span>
-                </div>
 
 
 </nav>
