@@ -1,0 +1,105 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+<div class="card" xmlns="http://www.w3.org/1999/html">
+      <h5 class="card-header">Inicio > Post</h5>
+      <div class="card-body">
+            <h5 class="card-title">{{ Pos.titulo }}</h5>
+          <h6 class="card-subtitle">{{ Pos.subtitulo }}</h6>
+        <p class="card-text">{{Pos.content|safe }}</p>
+
+
+      </div>
+    <img class="img-fluid" src="{{ Pos.image_file.url }}" alt="Card image cap">
+             <a href="#" class="btn btn-primary">Ver na fonte original</a>
+          <HR>
+            <div CLASS="container">
+                <HR>
+                <h3>Faça seu comentário:</h3>
+
+
+
+                      {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}>
+                        <div class="alert alert-success" role="alert">
+                               {{ message }}
+                         </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                   <!--Comment Area-->
+
+                        {% if request.user.is_authenticated %}
+
+                <form class="row g-3" method="post" action="{% url 'enviar_comentario' Pos.id %} " >
+                    {% csrf_token %}
+                  <div class="col-md-6">
+                    <label for="entrada_nome" class="form-label">Seu Nome</label>
+                    <input type="text" class="form-control" name="entrada_nome" id="entrada_nome"  placeholder="Seu nome...">
+                  </div>
+                    <div class="col-12">
+                        <label for="entrada_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="entrada_email" id="entrada_email" placeholder="Seu email...">
+                    </div>
+
+                  <div class="col-12">
+                    <label for="entrada_comentario" class="form-label">Comentário</label>
+                    <input type="text" class="form-control" name="entrada_comentario" id="entrada_comentario" placeholder="Comente aqui..">
+                  </div>
+                   <HR>
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </div>
+                </form>
+                  {% else %}
+                    <div style="background-color:#751088;color:#fff;font-weight:bolder;padding:20px;width:100%;"> Você precisa fazer o <a href="" ><b>login</b></a> para comentar ou responder.! </div>
+
+                {% endif %}
+            </div>
+
+            <HR>
+            <div class="card">
+
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-center "> Comentários </h3>
+                        <div class="row">
+                             {% for comentario in Comentarios %}
+                            <div class="col-md-12">
+
+
+                                <div class="media mt-4"> <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{comentario.image_url}}" />
+                                    <div class="media-body">
+                                        <div class="row">
+
+                                            <div class="col-8 d-flex">
+                                                <h5 ><b>{{comentario.nome_user}}</h5> </b><span> &nbsp;- </span>
+                                            </div>
+                                            <p style="font-size:13px">{{comentario.date}}</p>
+                                            <div class="col-4">
+                                                <div class="pull-right reply"> <a href="#"><span></span></a> </div>
+                                            </div>
+                                        </div>
+                                        {{comentario}}.
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>{% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
+{% endblock %}

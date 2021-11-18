@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
 
-    <a class="navbar-brand" href="{% url 'home' %}">Menu Principal</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Inicio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,12 +22,12 @@
               <ul class="navbar-nav">
 
         {% if request.user.is_staff %}
+         {% for categoria in categorias %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Todos Pedidos</a>
+          <a class="nav-link active" href="{% url 'Filtro_Categoria' categoria.id %}">{{ categoria }}</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Todos Produtos</a>
-        </li>
+
+         {% endfor %}
         {% else %}
        <li class="nav-item">
         <a class="nav-link" href="">Configurar perfil</a>
@@ -35,15 +35,21 @@
       </ul>
 
 
-          {% if request.user.is_staff %}
+
+
+    </div>
+  </div>
+            <div class="container">
+            {% if request.user.is_staff %}
            <span class="hello-msg">Olá,&nbsp; {{request.user.perfil_usuario}}</span>
            {% else %}
-            <span class="hello-msg">cOlá,&nbsp; {{request.user}}</span>
+            <span class="hello-msg">Olá,&nbsp; {{request.user}}
+
+            </span>
             <span><a class="hello-msg" href="">Configurar perfil</a></span>
            {% endif %}
               <span ><a  class="hello-msg" href="">&nbsp;Sair da conta</a></span>
+                </div>
 
-    </div>
 
-   </div>
 </nav>
