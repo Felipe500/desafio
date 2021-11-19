@@ -60,3 +60,4 @@ Back-end do envio de comentarios:
 - Desenvolver um layout mais estilizado
 - Criar um contador para visualizações nas postagens
 - Monitorar comentarios maliciosos ou seja com ofensas e palavrões -  p@#$%
+- Criar URLs personalizada para cada postagem de materia. Slug field.
