@@ -34,7 +34,7 @@
                     {% endif %}
                    <!--Comment Area-->
 
-                        {% if request.user.is_authenticated %}
+
 
                 <form class="row g-3" method="post" action="{% url 'enviar_comentario' Pos.id %} " >
                     {% csrf_token %}
@@ -56,10 +56,10 @@
                     <button type="submit" class="btn btn-primary">Enviar</button>
                   </div>
                 </form>
-                  {% else %}
-                    <div style="background-color:#751088;color:#fff;font-weight:bolder;padding:20px;width:100%;"> Você precisa fazer o <a href="" ><b>login</b></a> para comentar ou responder.! </div>
 
-                {% endif %}
+
+
+                
             </div>
 
             <HR>

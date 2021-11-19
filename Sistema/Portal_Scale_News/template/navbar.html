@@ -21,17 +21,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
 
-        {% if request.user.is_staff %}
+
          {% for categoria in categorias %}
         <li class="nav-item">
           <a class="nav-link active" href="{% url 'Filtro_Categoria' categoria.id %}">{{ categoria }}</a>
         </li>
 
          {% endfor %}
-        {% else %}
-       <li class="nav-item">
-        <a class="nav-link" href="">Configurar perfil</a>
-        {% endif %}
+
+
+
       </ul>
 
 
