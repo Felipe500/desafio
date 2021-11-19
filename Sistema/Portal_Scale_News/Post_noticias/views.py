@@ -12,6 +12,9 @@ def Postagens(request,id):
     categorias = Categoria.objects.all()
     Pos = Postagem.objects.get(id=id)
     Comentarios = Comentario.objects.filter(postagem_id=id)
+    #total_Comentarios = Comentario.postagem_set.all()
+    total_Comentarios = Comentarios.count()
+    #total_Comentarios = Postagem.comentario_set.filter(product__name="Ball").count()
     print("comentarios ",Comentarios)
     total_categorias = categorias.count()
 
@@ -21,7 +24,8 @@ def Postagens(request,id):
         "categorias": categorias,
         "num_categories": total_categorias,
         "title": "Meus foruns",
-        "Comentarios":Comentarios
+        "Comentarios":Comentarios,
+        "total_Comentarios":total_Comentarios
     }
     return render(request,'postagem.html',context)
 

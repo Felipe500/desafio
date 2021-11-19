@@ -22,8 +22,7 @@ def Home(request):
     return render(request, 'Home.html', context)
 
 def Filtro_Categoria(request,id):
-    #postagens = Postagem.objects.all()
-    #postagens = Postagem.objects.get(id=id)
+
     print("id--",id)
     postagens = Postagem.objects.filter(categories=id)
     categorias = Categoria.objects.all()
